@@ -1,13 +1,16 @@
 package prog3.tp_persistencia.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import prog3.tp_persistencia.enums.Estado;
+import prog3.tp_persistencia.enums.TipoEnvio;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,8 +20,20 @@ import java.util.Date;
 @Table(name = "pedido")
 public class Pedido extends BaseEntidad {
     private String fecha;
-    private enum estado {INICIADO, PREPARACION, ENTREGADO};
+    private Estado estado;
     private Date horaEstimadaEntrega;
-    private enum tipoEnvio {DELIVERY, RETIRA};
+    private TipoEnvio tipoEnvio;
     private double total;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "pedido_id")
+    @Builder.Default
+    private List<DetallePedido> detallesPedido = new ArrayList<>();
+    public void agregarDetalle(DetallePedido detallePedido) {
+        detallesPedido.add(detallePedido);
+    }
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "factura_id")
+    private Factura factura;
 }

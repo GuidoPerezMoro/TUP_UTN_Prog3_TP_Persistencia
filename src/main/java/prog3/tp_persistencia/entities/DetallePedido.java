@@ -1,7 +1,6 @@
 package prog3.tp_persistencia.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +15,8 @@ import lombok.NoArgsConstructor;
 public class DetallePedido extends BaseEntidad {
     private int cantidad;
     private double subtotal;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
 }

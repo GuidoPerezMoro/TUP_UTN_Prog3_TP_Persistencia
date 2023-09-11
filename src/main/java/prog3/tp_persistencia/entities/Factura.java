@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import prog3.tp_persistencia.enums.FormaPago;
 import java.util.Date;
 
 @Entity
@@ -15,10 +15,10 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Table(name = "factura")
-public class Factura {
+public class Factura extends BaseEntidad{
     private Date fecha;
     private int numero;
     private double descuento;
-    private enum formaPago {EFECTIVO, TRANSFERENCIA, MERCADOPAGO, MODO, DEBITO, CREDITO, CHEQUE};
+    private FormaPago formaPago;
     private double total;
 }

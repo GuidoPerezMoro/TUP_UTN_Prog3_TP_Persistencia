@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import prog3.tp_persistencia.enums.TipoProducto;
 
 @Entity
 @Data
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Table(name = "producto")
 public class Producto extends BaseEntidad {
-    private enum tipo {MANUFACTURADO, INSUMO};
+    private TipoProducto tipo;
     private int tiempoEstimadoCocina;
     private String denominacion;
     private double precioVenta;
