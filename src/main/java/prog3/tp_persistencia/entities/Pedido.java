@@ -23,7 +23,7 @@ public class Pedido extends BaseEntidad {
     private Estado estado;
     private Date horaEstimadaEntrega;
     private TipoEnvio tipoEnvio;
-    private double total;
+    private double total = 0;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "pedido_id")
@@ -33,7 +33,14 @@ public class Pedido extends BaseEntidad {
         detallesPedido.add(detallePedido);
     }
 
+    public void calcularTotal() {
+        for (DetallePedido detalle:detallesPedido)
+            total += detalle.getSubtotal() * (1 - getFactura().getDescuento() / 100);
+    }
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "factura_id")
     private Factura factura;
+
+
 }

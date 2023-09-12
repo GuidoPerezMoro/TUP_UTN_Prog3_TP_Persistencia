@@ -19,4 +19,8 @@ public class DetallePedido extends BaseEntidad {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "producto_id")
     private Producto producto;
+
+    public void calcularSubtotal() {
+        subtotal = cantidad*producto.getPrecioVenta();
+    }
 }

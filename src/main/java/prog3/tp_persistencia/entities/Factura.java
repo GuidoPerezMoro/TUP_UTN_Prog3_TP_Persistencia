@@ -21,4 +21,7 @@ public class Factura extends BaseEntidad{
     private double descuento;
     private FormaPago formaPago;
     private double total;
+    /*Para mí la relación entre pedido y factura debería ser bidireccional
+    para calcular el total de factura leyendo el de pedido*/
+
 }
